@@ -33,7 +33,7 @@ export default memo(({
 
           {Object.keys(availableProviders).length > 0 && (
             <>
-              <Separator className="my-8 hidden sm:block" />
+              <Separator className="hidden my-8 sm:block" />
               <div>
                 <LinkedAccountsForm
                   className="mt-10 sm:mt-0"
@@ -46,7 +46,7 @@ export default memo(({
 
           {jetstream.canUpdatePassword && (
             <>
-              <Separator className="my-8 hidden sm:block" />
+              <Separator className="hidden my-8 sm:block" />
               <div>
                 <UpdatePasswordForm className="mt-10 sm:mt-0" />
               </div>
@@ -55,7 +55,7 @@ export default memo(({
 
           {jetstream.canManageTwoFactorAuthentication && (
             <>
-              <Separator className="my-8 hidden sm:block" />
+              <Separator className="hidden my-8 sm:block" />
               <div>
                 <TwoFactorAuthenticationForm
                   className="mt-10 sm:mt-0"
@@ -67,7 +67,7 @@ export default memo(({
 
           {sessions.length > 0 && (
             <>
-              <Separator className="my-8 hidden sm:block" />
+              <Separator className="hidden my-8 sm:block" />
               <div>
                 <LogoutOtherBrowserSessionsForm
                   sessions={sessions}
@@ -79,7 +79,7 @@ export default memo(({
 
           {jetstream.hasAccountDeletionFeatures && (
             <>
-              <Separator className="my-8 hidden sm:block" />
+              <Separator className="hidden my-8 sm:block" />
               <div>
                 <DeleteUserForm className="mt-10 sm:mt-0" />
               </div>

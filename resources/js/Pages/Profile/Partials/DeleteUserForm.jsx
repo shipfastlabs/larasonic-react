@@ -22,20 +22,11 @@ export default memo(() => {
   }
 
   return (
-    <ActionSection>
-      <div className="flex justify-between md:col-span-1">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-lg font-medium">
-            Delete Account
-          </h3>
-          <p className="mt-1 text-sm">
-            Permanently delete your account.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-5 md:col-span-2 md:mt-0">
-        <div className="border px-4 py-5 shadow-xs rounded-lg sm:p-6">
+    <ActionSection
+      title="Delete Account"
+      description="Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain."
+      content={(
+        <>
           <div className="max-w-xl text-sm text-gray-600 dark:text-gray-400">
             Once your account is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.
           </div>
@@ -52,8 +43,9 @@ export default memo(() => {
               </Button>
             </ConfirmsPassword>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+    >
     </ActionSection>
   )
 })

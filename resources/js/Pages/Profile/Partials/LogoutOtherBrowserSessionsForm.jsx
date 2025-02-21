@@ -31,20 +31,11 @@ export default memo(({ sessions = DEFAULT_SESSIONS }) => {
   }
 
   return (
-    <ActionSection>
-      <div className="flex justify-between md:col-span-1">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-lg font-medium">
-            Browser Sessions
-          </h3>
-          <p className="mt-1 text-sm">
-            Manage and log out your active sessions on other browsers and devices.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-5 md:col-span-2 md:mt-0">
-        <div className="border px-4 py-5 shadow-xs rounded-lg sm:p-6">
+    <ActionSection
+      title="Browser Sessions"
+      description="Manage and log out your active sessions on other browsers and devices."
+      content={(
+        <>
           <div className="max-w-xl text-sm">
             If necessary, you may log out of all of your other browser sessions across all of your devices. Some of your recent sessions are listed below; however, this list may not be exhaustive. If you feel your account has been compromised, you should also update your password.
           </div>
@@ -93,7 +84,7 @@ export default memo(({ sessions = DEFAULT_SESSIONS }) => {
             </div>
           )}
 
-          <div className="mt-5 flex items-center">
+          <div className="flex items-center mt-5">
             <ConfirmsPassword
               title="Log Out Other Browser Sessions"
               content="Please enter your password to confirm you would like to log out of your other browser sessions across all of your devices."
@@ -105,8 +96,9 @@ export default memo(({ sessions = DEFAULT_SESSIONS }) => {
               </Button>
             </ConfirmsPassword>
           </div>
-        </div>
-      </div>
+        </>
+      )}
+    >
     </ActionSection>
   )
 })

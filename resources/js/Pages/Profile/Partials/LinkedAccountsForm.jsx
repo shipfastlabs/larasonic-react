@@ -63,20 +63,11 @@ export default memo(({ availableProviders = defaultProps.availableProviders, act
   }
 
   return (
-    <ActionSection>
-      <div className="flex justify-between md:col-span-1">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-lg font-medium">
-            Linked Accounts
-          </h3>
-          <p className="mt-1 text-sm">
-            Manage your linked social accounts for easier login access.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-5 md:col-span-2 md:mt-0">
-        <div className="border px-4 py-5 shadow-xs rounded-lg sm:p-6">
+    <ActionSection
+      title="Linked Accounts"
+      description="Manage your linked social accounts for easier login access."
+      content={(
+        <>
           <div className="max-w-xl text-sm">
             Link your accounts to enable single sign-on and manage your connected social profiles.
           </div>
@@ -85,7 +76,7 @@ export default memo(({ availableProviders = defaultProps.availableProviders, act
             {Object.entries(availableProviders).map(([slug, provider]) => (
               <div
                 key={slug}
-                className="flex items-center space-x-4 rounded-md border p-4 mt-4"
+                className="flex items-center p-4 mt-4 space-x-4 rounded-md border"
               >
                 <Icon icon={provider.icon} className="size-8" />
                 <div className="flex-1 space-y-1">
@@ -101,8 +92,9 @@ export default memo(({ availableProviders = defaultProps.availableProviders, act
               </div>
             ))}
           </div>
-        </div>
-      </div>
+        </>
+      )}
+    >
     </ActionSection>
   )
 })

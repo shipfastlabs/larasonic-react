@@ -11,7 +11,11 @@ import { memo, useEffect, useState } from 'react'
 import { route } from 'ziggy-js'
 
 export default memo(({ requiresConfirmation }) => {
-  const { props: { auth: { user } } } = usePage()
+  const {
+    props: {
+      auth: { user },
+    },
+  } = usePage()
   const [enabling, setEnabling] = useState(false)
   const [confirming, setConfirming] = useState(false)
   const [disabling, setDisabling] = useState(false)
@@ -47,26 +51,33 @@ export default memo(({ requiresConfirmation }) => {
   }
 
   const showRecoveryCodes = () => {
-    return axios.get(route('two-factor.recovery-codes')).then((response) => {
-      setRecoveryCodes(response.data)
-    })
+    return axios
+      .get(route('two-factor.recovery-codes'))
+      .then((response) => {
+        setRecoveryCodes(response.data)
+      })
   }
 
   const enableTwoFactorAuthentication = () => {
     setEnabling(true)
 
-    router.post(route('two-factor.enable'), {}, {
-      preserveScroll: true,
-      onSuccess: () => Promise.all([
-        showQrCode(),
-        showSetupKey(),
-        showRecoveryCodes(),
-      ]),
-      onFinish: () => {
-        setEnabling(false)
-        setConfirming(requiresConfirmation)
+    router.post(
+      route('two-factor.enable'),
+      {},
+      {
+        preserveScroll: true,
+        onSuccess: () =>
+          Promise.all([
+            showQrCode(),
+            showSetupKey(),
+            showRecoveryCodes(),
+          ]),
+        onFinish: () => {
+          setEnabling(false)
+          setConfirming(requiresConfirmation)
+        },
       },
-    })
+    )
   }
 
   const confirmTwoFactorAuthentication = () => {
@@ -83,7 +94,9 @@ export default memo(({ requiresConfirmation }) => {
   }
 
   const regenerateRecoveryCodes = () => {
-    axios.post(route('two-factor.recovery-codes')).then(() => showRecoveryCodes())
+    axios
+      .post(route('two-factor.recovery-codes'))
+      .then(() => showRecoveryCodes())
   }
 
   const disableTwoFactorAuthentication = () => {
@@ -99,24 +112,11 @@ export default memo(({ requiresConfirmation }) => {
   }
 
   return (
-    <ActionSection>
-      <div className="flex justify-between md:col-span-1">
-        <div className="px-4 sm:px-0">
-          <h3 className="text-lg font-medium">
-            Two Factor Authentication
-          </h3>
-          <p className="mt-1 text-sm">
-            Add additional security to your account using two factor authentication.
-          </p>
-        </div>
-      </div>
-
-      <div className="mt-5 md:col-span-2 md:mt-0">
-        <div
-          className="border px-4 py-5 shadow-xs rounded-lg sm:p-6"
-          role="region"
-          aria-label="Two Factor Authentication Settings"
-        >
+    <ActionSection
+      title="Two Factor Authentication"
+      description="Add additional security to your account using two factor authentication."
+      content={(
+        <>
           <h3 className="text-lg font-medium">
             {twoFactorEnabled && !confirming
               ? 'You have enabled two factor authentication.'
@@ -127,7 +127,10 @@ export default memo(({ requiresConfirmation }) => {
 
           <div className="mt-3 max-w-xl text-sm">
             <p>
-              When two factor authentication is enabled, you will be prompted for a secure, random token during authentication. You may retrieve this token from your phone's Google Authenticator application.
+              When two factor authentication is enabled, you will
+              be prompted for a secure, random token during
+              authentication. You may retrieve this token from
+              your phone's Google Authenticator application.
             </p>
           </div>
 
@@ -152,7 +155,11 @@ export default memo(({ requiresConfirmation }) => {
                       <p className="font-semibold">
                         Setup Key:
                         {' '}
-                        <span dangerouslySetInnerHTML={{ __html: setupKey }} />
+                        <span
+                          dangerouslySetInnerHTML={{
+                            __html: setupKey,
+                          }}
+                        />
                       </p>
                     </div>
                   )}
@@ -163,15 +170,28 @@ export default memo(({ requiresConfirmation }) => {
                       <Input
                         id="code"
                         type="text"
-                        value={confirmationForm.data.code}
-                        onChange={e => confirmationForm.setData('code', e.target.value)}
-                        className="mt-1 block w-1/2"
+                        value={
+                          confirmationForm.data.code
+                        }
+                        onChange={e =>
+                          confirmationForm.setData(
+                            'code',
+                            e.target.value,
+                          )}
+                        className="block mt-1 w-1/2"
                         inputMode="numeric"
                         autoFocus
                         autoComplete="one-time-code"
-                        onKeyUp={e => e.key === 'Enter' && confirmTwoFactorAuthentication()}
+                        onKeyUp={e =>
+                          e.key === 'Enter'
+                          && confirmTwoFactorAuthentication()}
                       />
-                      <InputError message={confirmationForm.errors.code} className="mt-2" />
+                      <InputError
+                        message={
+                          confirmationForm.errors.code
+                        }
+                        className="mt-2"
+                      />
                     </div>
                   )}
                 </div>
@@ -192,8 +212,14 @@ export default memo(({ requiresConfirmation }) => {
           <div className="mt-5">
             {!twoFactorEnabled
               ? (
-                  <ConfirmsPassword onConfirmed={enableTwoFactorAuthentication}>
-                    <Button type="button" disabled={enabling} className={enabling ? 'opacity-25' : ''}>
+                  <ConfirmsPassword
+                    onConfirmed={enableTwoFactorAuthentication}
+                  >
+                    <Button
+                      type="button"
+                      disabled={enabling}
+                      className={enabling ? 'opacity-25' : ''}
+                    >
                       Enable
                     </Button>
                   </ConfirmsPassword>
@@ -201,11 +227,17 @@ export default memo(({ requiresConfirmation }) => {
               : (
                   <div className="space-x-3">
                     {confirming && (
-                      <ConfirmsPassword onConfirmed={confirmTwoFactorAuthentication}>
+                      <ConfirmsPassword
+                        onConfirmed={
+                          confirmTwoFactorAuthentication
+                        }
+                      >
                         <Button
                           type="button"
                           disabled={enabling}
-                          className={enabling ? 'opacity-25' : ''}
+                          className={
+                            enabling ? 'opacity-25' : ''
+                          }
                         >
                           Confirm
                         </Button>
@@ -213,7 +245,9 @@ export default memo(({ requiresConfirmation }) => {
                     )}
 
                     {recoveryCodes.length > 0 && !confirming && (
-                      <ConfirmsPassword onConfirmed={regenerateRecoveryCodes}>
+                      <ConfirmsPassword
+                        onConfirmed={regenerateRecoveryCodes}
+                      >
                         <Button variant="secondary">
                           Regenerate Recovery Codes
                         </Button>
@@ -221,7 +255,9 @@ export default memo(({ requiresConfirmation }) => {
                     )}
 
                     {recoveryCodes.length === 0 && !confirming && (
-                      <ConfirmsPassword onConfirmed={showRecoveryCodes}>
+                      <ConfirmsPassword
+                        onConfirmed={showRecoveryCodes}
+                      >
                         <Button variant="secondary">
                           Show Recovery Codes
                         </Button>
@@ -230,22 +266,34 @@ export default memo(({ requiresConfirmation }) => {
 
                     {confirming
                       ? (
-                          <ConfirmsPassword onConfirmed={disableTwoFactorAuthentication}>
+                          <ConfirmsPassword
+                            onConfirmed={
+                              disableTwoFactorAuthentication
+                            }
+                          >
                             <Button
                               variant="secondary"
                               disabled={disabling}
-                              className={disabling ? 'opacity-25' : ''}
+                              className={
+                                disabling ? 'opacity-25' : ''
+                              }
                             >
                               Cancel
                             </Button>
                           </ConfirmsPassword>
                         )
                       : (
-                          <ConfirmsPassword onConfirmed={disableTwoFactorAuthentication}>
+                          <ConfirmsPassword
+                            onConfirmed={
+                              disableTwoFactorAuthentication
+                            }
+                          >
                             <Button
                               variant="destructive"
                               disabled={disabling}
-                              className={disabling ? 'opacity-25' : ''}
+                              className={
+                                disabling ? 'opacity-25' : ''
+                              }
                             >
                               Disable
                             </Button>
@@ -254,8 +302,9 @@ export default memo(({ requiresConfirmation }) => {
                   </div>
                 )}
           </div>
-        </div>
-      </div>
+        </>
+      )}
+    >
     </ActionSection>
   )
 })
