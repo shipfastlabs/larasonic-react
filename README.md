@@ -20,10 +20,12 @@ Larasonic is a modern, open-source SaaS starter kit with Laravel, React, Shadcn,
 
 ## Quick Start
 
+### If you are using Docker
+
 ```bash
 # Clone the repo
-git clone git@github.com:pushpak1300/Larasonic.git
-cd Larasonic
+git clone git@github.com:pushpak1300/Larasonic-react.git
+cd Larasonic-react
 
 # Install dependencies
 docker run --rm \
@@ -37,6 +39,23 @@ docker run --rm \
 cp .env.example .env
 ./vendor/bin/sail up -d
 ./vendor/bin/sail composer run setup
+```
+
+### If you are not using Docker
+
+```bash
+# Clone the repo
+git clone git@github.com:pushpak1300/Larasonic-react.git
+cd Larasonic-react
+
+# Install dependencies
+composer install
+npm install
+npm run build
+
+# Setup environment
+cp .env.example .env
+composer run setup
 ```
 
 For detailed installation instructions and documentation, visit [docs.larasonic.com](https://docs.larasonic.com).
