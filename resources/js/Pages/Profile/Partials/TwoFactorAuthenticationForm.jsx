@@ -147,7 +147,11 @@ export default memo(({ requiresConfirmation }) => {
                   </div>
 
                   <div className="mt-4 max-w-xl text-sm text-gray-600">
-                    {qrCode}
+                    <span
+                      dangerouslySetInnerHTML={{
+                        __html: qrCode,
+                      }}
+                    />
                   </div>
 
                   {setupKey && (

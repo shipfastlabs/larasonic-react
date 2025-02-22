@@ -24,7 +24,7 @@ Larasonic is a modern, open-source SaaS starter kit with Laravel, React, Shadcn,
 
 ```bash
 # Clone the repo
-git clone git@github.com:pushpak1300/Larasonic-react.git
+git clone git@github.com:shipfastlabs/larasonic-react.git
 cd Larasonic-react
 
 # Install dependencies
@@ -45,13 +45,13 @@ cp .env.example .env
 
 ```bash
 # Clone the repo
-git clone git@github.com:pushpak1300/Larasonic-react.git
+git clone git@github.com:shipfastlabs/larasonic-react.git
 cd Larasonic-react
 
 # Install dependencies
 composer install
-npm install
-npm run build
+bun install
+bun run build
 
 # Setup environment
 cp .env.example .env
