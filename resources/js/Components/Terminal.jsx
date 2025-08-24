@@ -9,8 +9,8 @@ export default memo(() => {
   const terminalSteps = [
     'git clone https://github.com/shipfastlabs/larasonic-react',
     'cd larasonic && composer install',
-    '.vendor/bin/sail up',
-    '.vendor/bin/sail composer setup',
+    './vendor/bin/sail up',
+    './vendor/bin/sail composer setup',
   ]
 
   useEffect(() => {
